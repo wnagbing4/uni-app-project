@@ -285,7 +285,7 @@
 				svid: options.svid
 			},
 			success: (res) => {
-				console.log(res, 'res')
+				console.log(res, '/Service/order')
 				service.value = res.data.data.service
 				hospitals.value = res.data.data.hospitals
 				// 默认选中

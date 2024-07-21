@@ -16,6 +16,7 @@ const _sfc_main = {
   setup(__props) {
     const app = getApp();
     const hospital = common_vendor.ref({});
+    const services = common_vendor.ref([]);
     common_vendor.onLoad((params) => {
       app.globalData.utils.request({
         url: "/Hospital/index",
@@ -25,6 +26,7 @@ const _sfc_main = {
         success: (res) => {
           console.log(res);
           hospital.value = res.data.data.hospital;
+          services.value = res.data.data.services;
         }
       });
     });
@@ -35,6 +37,39 @@ const _sfc_main = {
     const clone_shareModal = common_vendor.ref(false);
     const showShareModal = () => {
       clone_shareModal.value = true;
+    };
+    const toMap = () => {
+      const point = bMapTransQQMap(hospital.value.lng, hospital.value.lat);
+      const {
+        qmap_key: key
+      } = common_vendor.index.getStorageSync("cfg");
+      const referer = app.globalData.name;
+      const endPoint = JSON.stringify({
+        name: hospital.value.name,
+        latitude: point.lat,
+        longitude: point.lng
+      });
+      common_vendor.index.navigateTo({
+        url: "plugin://routePlan/index?key=" + key + "&referer=" + referer + "&endPoint=" + endPoint + "&navigation=1"
+      });
+    };
+    const bMapTransQQMap = (lng, lat) => {
+      let x_pi = 3.141592653589793 * 3e3 / 180;
+      let x = lng - 65e-4;
+      let y = lat - 6e-3;
+      let z = Math.sqrt(x * x + y * y) - 2e-5 * Mathsin(y * x_pi);
+      let theta = Math.atan2(y, x) - 3e-6 * Math.cos(x * x_pi);
+      let lngs = z * Math.cos(theta);
+      let lats = z * Math.sin(theta);
+      return {
+        lng: lngs,
+        lat: lats
+      };
+    };
+    const toService = (e) => {
+      common_vendor.index.navigateTo({
+        url: "../service/index?hid=" + hospital.value.id + "&svid=" + e.currentTarget.dataset.svid
+      });
     };
     return (_ctx, _cache) => {
       return {
@@ -55,17 +90,17 @@ const _sfc_main = {
         j: common_vendor.t(hospital.value.city),
         k: common_vendor.t(hospital.value.district),
         l: common_vendor.t(hospital.value.address),
-        m: common_vendor.o((...args) => _ctx.toMap && _ctx.toMap(...args)),
-        n: common_vendor.f(_ctx.services, (item, index, i0) => {
+        m: common_vendor.o(toMap),
+        n: common_vendor.f(services.value, (item, index, i0) => {
           return common_vendor.e({
             a: item.use_switch == 1
           }, item.use_switch == 1 ? {
-            b: item.logo_image ? item.logo_image_url : "../../resource/images/avatar.jpg",
+            b: item.logo_image ? item.logo_image_url : "../../static/images/avatar.jpg",
             c: common_vendor.t(item.name),
             d: common_vendor.t(item.intro),
             e: common_vendor.t(item.price)
           } : {}, {
-            f: common_vendor.o((...args) => _ctx.toService && _ctx.toService(...args), index),
+            f: common_vendor.o(toService, index),
             g: item.id,
             h: index
           });

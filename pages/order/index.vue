@@ -119,6 +119,7 @@
 	// 订单列表数据
 	const list=ref(null)
 	onShow(() => {
+		filt.value=app.globalData.order_filt
 		loadList()
 	})
 	// 订单状态筛选

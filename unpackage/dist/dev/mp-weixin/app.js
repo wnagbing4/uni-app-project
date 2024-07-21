@@ -5,16 +5,21 @@ const common_js_utils = require("./common/js/utils.js");
 if (!Math) {
   "./pages/index/index.js";
   "./pages/order/index.js";
-  "./pages/user/index.js";
   "./pages/search/index.js";
   "./pages/hospital/index.js";
   "./pages/service/index.js";
   "./pages/clients/index.js";
   "./pages/order/order.js";
+  "./pages/user/index.js";
 }
 const _sfc_main = {
   onLaunch: function() {
-    console.log("App Launch");
+    common_js_utils.Utils.request({
+      url: "/app/init",
+      success: (res) => {
+        common_vendor.index.setStorageSync("cfg", res.data.data.cfg);
+      }
+    });
   },
   onShow: function() {
     console.log("App Show");
@@ -23,7 +28,8 @@ const _sfc_main = {
     console.log("App Hide");
   },
   globalData: {
-    utils: common_js_utils.Utils
+    utils: common_js_utils.Utils,
+    order_filt: ""
   }
 };
 Date.prototype.VP_FORMAT = function(format) {

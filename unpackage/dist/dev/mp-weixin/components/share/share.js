@@ -30,8 +30,8 @@ const _sfc_main = {
         d: common_vendor.o(hideShareModal),
         e: common_assets._imports_0$1,
         f: common_vendor.o(hideShareModal),
-        g: common_assets._imports_1$1,
-        h: common_assets._imports_2,
+        g: common_assets._imports_1$2,
+        h: common_assets._imports_2$1,
         i: common_vendor.o(shareByPoster)
       } : {});
     };

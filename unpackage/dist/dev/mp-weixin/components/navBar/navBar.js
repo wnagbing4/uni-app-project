@@ -89,9 +89,9 @@ const _sfc_main = {
       } : common_vendor.e({
         e: pages.value > 1
       }, pages.value > 1 ? {
-        f: common_assets._imports_0$5
+        f: common_assets._imports_0$6
       } : {
-        g: common_assets._imports_1
+        g: common_assets._imports_1$1
       }, {
         h: common_vendor.o(backOrHome),
         i: __props.titleText

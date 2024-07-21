@@ -1,5 +1,6 @@
 {
-  "navigationBarTitleText": "",
-  "enablePullDownRefresh": false,
-  "usingComponents": {}
+  "navigationBarTitleText": "我的",
+  "usingComponents": {
+    "share": "../../components/share/share"
+  }
 }

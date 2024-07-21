@@ -13,14 +13,7 @@
 				"navigationBarBackgroundColor": "#ffffff"
 			}
 
-		}, {
-			"path": "pages/user/index",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		},
+		}, 
 		{
 			"path" : "pages/search/index",
 			"style" : 
@@ -57,6 +50,13 @@
 			{
 				"navigationBarTitleText" : "订单详情"
 			}
+		},
+		{
+			"path" : "pages/user/index",
+			"style" : 
+			{
+				"navigationBarTitleText" : "我的"
+			}
 		}
 	],
 	"tabBar": {
@@ -68,7 +68,6 @@
 				"iconPath": "static/images/tab_index.png",
 				"selectedIconPath": "static/images/tab_index_seled.png",
 				"text": "首页"
-
 			},
 			{
 				"pagePath": "pages/order/index",
@@ -84,6 +83,12 @@
 			}
 		]
 	},
+	// "plugins":{
+	// 	"routePlan":{   
+	// 		"version":"1.0.19",
+	// 		"provider":"wx50b5593e81dd937a"
+	// 	}
+	// },
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",

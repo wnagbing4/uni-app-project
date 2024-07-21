@@ -1,9 +1,11 @@
 page {
     background: #f4f4f4;
 }
+
 .weui-cell {
     padding: 30rpx 40rpx;
 }
+
 .user-nickname {
     font-weight: bold;
     margin: 0 5rpx 0 50rpx;
@@ -13,6 +15,7 @@ page {
         no-repeat right center;
     background-size: 30rpx;
 }
+
 .data-cells .weui-cell {
     padding: 0 !important;
 }
@@ -55,20 +58,24 @@ page {
 .data-cell-hint-red {
     background: #de4130;
 }
+
 .grid view {
     border: 1rpx solid #cccccc;
     border-left: none;
 }
+
 .pannel-title {
     font-size: 28rpx;
     font-weight: bold;
 }
+
 .orders-cells {
     border-bottom: 1rpx solid #eeeeee;
 }
 .orders-cells .weui-cell {
     padding: 30rpx;
 }
+
 .orders-cell {
     padding: 30rpx 0;
     text-align: center;
@@ -97,6 +104,7 @@ page {
 .orders-cell-hint-red {
     background: #de4130;
 }
+
 .op-cells {
     margin: 20rpx;
     border-radius: 10rpx;

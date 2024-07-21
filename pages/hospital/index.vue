@@ -40,7 +40,7 @@
 						<view class="weui-cell__ft weui-cell__ft_in-access"><text class="f4">导航</text></view>
 					</view>
 				</view>
-			
+
 				<view class="hospital-bd">
 					<view class="weui-cells serv-list">
 						<view class="weui-cell serv-item">
@@ -54,7 +54,7 @@
 							<block v-if="item.use_switch == 1">
 								<view class="weui-cell__hd">
 									<image class="serv-logo"
-										:src="item.logo_image ? item.logo_image_url : '../../resource/images/avatar.jpg'"
+										:src="item.logo_image ? item.logo_image_url : '../../static/images/avatar.jpg'"
 										mode="aspectFill" />
 								</view>
 
@@ -90,17 +90,19 @@
 		onReady,
 		onLoad
 	} from '@dcloudio/uni-app'
-	const app=getApp()
-	const hospital=ref({})
-	onLoad((params) => { 
+	const app = getApp()
+	const hospital = ref({})
+	const services = ref([])
+	onLoad((params) => {
 		app.globalData.utils.request({
-			url:'/Hospital/index',
-			data:{
-				hid:params.hid
+			url: '/Hospital/index',
+			data: {
+				hid: params.hid
 			},
-			success:res=>{
+			success: res => {
 				console.log(res)
-				hospital.value=res.data.data.hospital
+				hospital.value = res.data.data.hospital
+				services.value = res.data.data.services
 			}
 		})
 	})
@@ -110,9 +112,43 @@
 		navBarHeight.value = e.detail.navBarHeight
 	}
 	// 分享功能是否打开
-	const clone_shareModal=ref(false)
+	const clone_shareModal = ref(false)
 	const showShareModal = () => {
-	clone_shareModal.value=true
+		clone_shareModal.value = true
+	}
+	const toMap = () => {
+		const point = bMapTransQQMap(hospital.value.lng, hospital.value.lat)
+		const {
+			qmap_key: key
+		} = uni.getStorageSync('cfg')
+		const referer = app.globalData.name
+		const endPoint = JSON.stringify({
+			name: hospital.value.name,
+			latitude: point.lat,
+			longitude: point.lng
+		})
+		uni.navigateTo({
+			url: "plugin://routePlan/index?key=" + key + '&referer=' + referer + '&endPoint=' + endPoint +
+				'&navigation=1'
+		})
+	}
+	const bMapTransQQMap = (lng, lat) => {
+		let x_pi = (3.141592653589793 * 3000) / 180
+		let x = lng - 0.0065
+		let y = lat - 0.006
+		let z = Math.sqrt(x * x + y * y) - 0.00002 * Mathsin(y * x_pi)
+		let theta = Math.atan2(y, x) - 0.000003 * Math.cos(x * x_pi)
+		let lngs = z * Math.cos(theta)
+		let lats = z * Math.sin(theta)
+		return {
+			lng: lngs,
+			lat: lats
+		}
+	}
+	const toService = (e) => {
+		uni.navigateTo({
+			url:'../service/index?hid='+hospital.value.id+'&svid='+e.currentTarget.dataset.svid
+		})
 	}
 </script>
 
