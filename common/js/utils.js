@@ -1,11 +1,11 @@
 class Utils {
 	constructor() {
-		this.baseUrl = 'http://159.75.169.224:7300/pz'
+		this.baseUrl = 'https://code.itndedu.com/pz'
 	}
 	getUserInfo() {
 		uni.login({
 			success: (res) => {
-				this.request({
+				this.request({  
 					url: '/auth/wxLogin',
 					data: {
 						code: res.code

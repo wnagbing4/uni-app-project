@@ -2,7 +2,7 @@
 const common_vendor = require("../vendor.js");
 class Utils {
   constructor() {
-    this.baseUrl = "http://159.75.169.224:7300/pz";
+    this.baseUrl = "https://code.itndedu.com/pz";
   }
   getUserInfo() {
     common_vendor.index.login({
